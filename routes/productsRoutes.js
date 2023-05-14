@@ -9,8 +9,8 @@ const router = express.Router()
 //No Token required public routes
 router.get("/",asyncHandler(async(req,res)=>{
     const products= await Product.find({});
-    throw new Error("Bagg sala")
     
+    res.json(products)
 }))
 
 
