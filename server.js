@@ -4,13 +4,24 @@ import products from "./data/products.js";
 import connectMongooseDB from './config/database.js';
 import colors from 'colors';
 import productRoutes from "./routes/productsRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
-const app = express()
+import { authUser } from './controller/userController.js';
+
 dotenv.config()
 
 connectMongooseDB()
 
+const app = express()
+
+app.use(express.json())
+
+app.get('/',(req,res)=>{
+    res.send("API is running....")
+})
+
 app.use("/api/products",productRoutes)
+app.use("/api/users",authUser)
 
 app.use(notFound)
 
