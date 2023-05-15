@@ -7,7 +7,7 @@ import protectValidUser from "../middleware/authMiddleWare.js";
 const router = express.Router()
 
 router.post("/login",authUser)
-router.route("/profile").get(protectValidUser,getUserProfile)
-router.post("/").post(createUser)
+router.get("/profile",protectValidUser,getUserProfile)
+router.post("/",createUser)
 
 export default router
