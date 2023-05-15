@@ -1,6 +1,6 @@
 import express from "express";
-import { authUser, createUser, getUserProfile } from "../controller/userController";
-import protectValidUser from "../middleware/authMiddleWare";
+import { authUser, createUser, getUserProfile } from "../controller/userController.js";
+import protectValidUser from "../middleware/authMiddleWare.js";
 
 
 
