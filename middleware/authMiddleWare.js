@@ -25,8 +25,7 @@ const protectValidUser = asyncHandler(async(req,res)=>{
     if(!token){
         res.status(401)
         throw new Error("Not Authorized or Not Token")
-    }
-    
+    }    
 })
 
 export default protectValidUser
