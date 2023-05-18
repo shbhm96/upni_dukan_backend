@@ -7,9 +7,11 @@ import generateToken from "../utils/generateTokens.js";
 //GET /api/priducts
 //No Token required public routes
 const authUser = asyncHandler(async(req,res) => {
+    console.log("34567")
     const {email,password} = req.body
 
     const user = await User.findOne({email})
+    console.log("control",user)
 
     if(user && (await user.matchPassword(password))){
         return res.json({

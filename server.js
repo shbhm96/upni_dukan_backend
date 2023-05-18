@@ -7,6 +7,7 @@ import productRoutes from "./routes/productsRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 import { authUser } from './controller/userController.js';
+import cors from 'cors'
 
 dotenv.config()
 
@@ -16,12 +17,17 @@ const app = express()
 
 app.use(express.json())
 
+app.use(cors())
+
 app.get('/',(req,res)=>{
     res.send("API is running....")
 })
 
+app.use("/api/test",(req,res)=>{
+    res.send("TEST SUCCESSFULL")
+})
 app.use("/api/products",productRoutes)
-app.use("/api/users",authUser)
+app.use("/api/users",userRoutes)
 
 app.use(notFound)
 

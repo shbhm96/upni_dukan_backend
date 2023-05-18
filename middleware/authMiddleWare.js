@@ -1,10 +1,12 @@
 import jwt from "jsonwebtoken"
 import asyncHandler from "express-async-handler"
 import User from "../models/usersModel.js";
+import dotenv from "dotenv";
 
 const protectValidUser = asyncHandler(async(req,res)=>{
     let token;
     console.log(req.header.authorization)
+    dotenv.config()
 
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         try{
