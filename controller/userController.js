@@ -6,8 +6,7 @@ import generateToken from "../utils/generateTokens.js";
 //Fetch all Products
 //GET /api/priducts
 //No Token required public routes
-const authUser = asyncHandler(async(req,res) => {
-    console.log("34567")
+const authUser = asyncHandler(async(req,res) => {    
     const {email,password} = req.body
 
     const user = await User.findOne({email})
@@ -49,7 +48,10 @@ const getUserProfile = asyncHandler(async(req,res) => {
 })
 
 const createUser = asyncHandler(async(req,res) => {
+
     const {name, email,password} = req.body
+    console.log(name,email,password)
+    
 
     const userExist = await User.findOne({email})
 
@@ -57,18 +59,17 @@ const createUser = asyncHandler(async(req,res) => {
         res.status(400)
         throw new Error("User Already Exist")
     }
-
     const user = await User.create({
         name,
         email,
         password
     })
-
+    console.log("Create Use112r",user)
     if(user){
         res.status(201).json({
-            _id : user._id,
-            name : user.name,
-            email:user.email,
+            _id : ''+user._id,
+            name : ''+user.name.toString(),
+            email:  ''+user.email.toString(),
             isAdmin : user.isAdmin,
             token : generateToken(user._id)
         })
@@ -76,5 +77,6 @@ const createUser = asyncHandler(async(req,res) => {
         res.status(400)
         throw new Error("Invalid User Data")
     }
+    console.log("Create User8   `729")
 })
 export {authUser,getUserProfile,createUser}
