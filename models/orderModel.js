@@ -50,14 +50,12 @@ const orderSchema = mongoose.Schema({
     paidAt:{
         type:Date,
         required:true,        
+        default:Date.now()
     },
     isDelivered:{
         type:Date,
-        required:true
-    },
-    isDelivered:{
-        type:Boolean,
-        required:true
+        required:true,
+        default:Date.now()
     },
     
 },{

@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler"
 import User from "../models/usersModel.js";
 import dotenv from "dotenv";
 
-const protectValidUser = asyncHandler(async(req,res)=>{
+const protectValidUser = asyncHandler(async(req,res,next)=>{
     let token;
     console.log(req.header.authorization)
     dotenv.config()
@@ -14,7 +14,6 @@ const protectValidUser = asyncHandler(async(req,res)=>{
             const decoded = jwt.verify(token,process.env.JWT_SECRET)
 
             req.user = await User.findById(decoded.id).select("-password")
-
             next()
         }catch(error){
             console.log(error)
