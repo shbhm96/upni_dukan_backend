@@ -7,8 +7,6 @@ import {
 } from "../controller/orderController.js";
 import { protectValidUser } from "../middleware/authMiddleWare.js";
 
-
-
 const router = express.Router()
 
 router.get("/myorders",protectValidUser,getLoggedInUserOrders)
