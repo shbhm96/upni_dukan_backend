@@ -14,6 +14,7 @@ const protectValidUser = asyncHandler(async(req,res,next)=>{
             const decoded = jwt.verify(token,process.env.JWT_SECRET)
 
             req.user = await User.findById(decoded.id).select("-password")
+            console.log("Token Found")
             next()
         }catch(error){
             console.log(error)
@@ -21,7 +22,7 @@ const protectValidUser = asyncHandler(async(req,res,next)=>{
             throw new Error("Not Authorized Token, Token Failed")
 
         }
-        console.log("Token Found")
+        
     }
     if(!token){
         res.status(401)

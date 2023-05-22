@@ -6,7 +6,6 @@ import Order from "../models/orderModel.js";
 //Token required private routes
 
 const addOrderItems = asyncHandler(async(req,res) => {
-    console.log("add order")
     const {
         orderItems,
         shippingAddress,
@@ -31,17 +30,14 @@ const addOrderItems = asyncHandler(async(req,res) => {
         shippingPrice,
         totalPrice
         })
-        console.log("Order va",order)
         const createdOrder= await order.save()
-        console.log("kl",createdOrder)
         res.status(201).json(createdOrder)
     }
 })
 
 const getOrderById = asyncHandler(async(req,res) => {
 
-    const order = await Order.findById(req.params.id).populate('user','name','email')
-    console.log("Order Found")
+    const order = await Order.findById(req.params.id).populate('user').select("-password")
 
     if(order){
         res.status(201).json(order)
@@ -51,4 +47,39 @@ const getOrderById = asyncHandler(async(req,res) => {
     }    
 })
 
-export {addOrderItems,getOrderById}
+
+const updateOrderToPaid = asyncHandler(async(req,res) => {
+
+    const order = await Order.findById(req.params.id)
+
+    if(order){
+        order.isPaid = true
+        order.paidAt = Date.now()
+        order.paymentResult = {
+            id          :   req.body.id,
+            status      :   req.body.status,
+            update_time :   req.body.update_time,
+            email_address:  req.body.payer.email_address
+        }
+
+        const updatedOrder = await order.save()
+        res.json(updatedOrder)
+    }else{
+        res.status(401)
+        throw new Error('Order Not Found')
+    }    
+})
+
+const getLoggedInUserOrders = asyncHandler(async(req,res) => {
+
+    const orders = await Order.find({user : req.user._id})
+    if(orders){
+        return res.json(orders)
+
+    }else{
+        res.status(401)
+        throw new Error('Order Not Found')
+    }   
+})
+
+export {addOrderItems,getOrderById,updateOrderToPaid,getLoggedInUserOrders}
