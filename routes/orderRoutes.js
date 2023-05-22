@@ -5,7 +5,8 @@ import {
     getOrderById, 
     updateOrderToPaid 
 } from "../controller/orderController.js";
-import protectValidUser from "../middleware/authMiddleWare.js";
+import { protectValidUser } from "../middleware/authMiddleWare.js";
+
 
 
 const router = express.Router()

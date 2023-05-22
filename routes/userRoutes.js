@@ -6,7 +6,8 @@ import
     getUserProfile, 
     updateUserProfile 
 } from "../controller/userController.js";
-import protectValidUser from "../middleware/authMiddleWare.js";
+import { protectValidUser } from "../middleware/authMiddleWare.js";
+
 const router = express.Router()
 
 router.post("/login",authUser)

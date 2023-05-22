@@ -30,7 +30,7 @@ const protectValidUser = asyncHandler(async(req,res,next)=>{
     }    
 })
 const isAdminUser = (req,res,next)=>{
-    if(req,user && user.user.isAdmin){
+    if(req.user && user.user.isAdmin){
         next()
     }else{
         res.status(401)
