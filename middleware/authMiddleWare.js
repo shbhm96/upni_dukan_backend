@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 
 const protectValidUser = asyncHandler(async(req,res,next)=>{
     let token;
-    console.log(req.header.authorization)
     dotenv.config()
 
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
@@ -30,7 +29,8 @@ const protectValidUser = asyncHandler(async(req,res,next)=>{
     }    
 })
 const isAdminUser = (req,res,next)=>{
-    if(req.user && user.user.isAdmin){
+    if(req.user && req.user.isAdmin){
+        console.log("It is Admin")
         next()
     }else{
         res.status(401)

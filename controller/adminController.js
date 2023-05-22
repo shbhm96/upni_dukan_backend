@@ -4,7 +4,8 @@ import generateToken from "../utils/generateTokens.js";
 
 
 const getAllUsersForAdmin = asyncHandler(async(req,res) => {
-    const users = await User.findById({})
+    const users = await User.find({})
+    console.log("Users",users)
     res.send(users)
 })
 const deleteUserForAdmin = asyncHandler(async(req,res)=>{
