@@ -29,5 +29,13 @@ const protectValidUser = asyncHandler(async(req,res,next)=>{
         throw new Error("Not Authorized or Not Token")
     }    
 })
+const isAdminUser = (req,res,next)=>{
+    if(req,user && user.user.isAdmin){
+        next()
+    }else{
+        res.status(401)
+        throw new Error("Not Authorised as Admin")
+    }
+}
 
-export default protectValidUser
+export {protectValidUser,isAdminUser}

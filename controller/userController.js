@@ -107,4 +107,6 @@ const updateUserProfile = asyncHandler(async(req,res) => {
     res.send({email,password})
 })
 
+
+
 export {authUser,getUserProfile,createUser,updateUserProfile}

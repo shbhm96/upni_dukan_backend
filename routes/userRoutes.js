@@ -14,4 +14,5 @@ router.get("/profile",protectValidUser,getUserProfile)
 router.get("/profile/update",protectValidUser,updateUserProfile)
 router.post("/",createUser)
 
+
 export default router

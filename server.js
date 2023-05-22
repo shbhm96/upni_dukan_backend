@@ -1,13 +1,12 @@
 import express from 'express';
 import dotenv from "dotenv";
-import products from "./data/products.js";
 import connectMongooseDB from './config/database.js';
 import colors from 'colors';
 import productRoutes from "./routes/productsRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
-import { authUser } from './controller/userController.js';
+import adminRoutes from "./routes/adminRoutes.js"
 import cors from 'cors'
 
 dotenv.config()
@@ -30,6 +29,7 @@ app.use("/api/test",(req,res)=>{
 app.use("/api/products",productRoutes)
 app.use("/api/users",userRoutes)
 app.use("/api/orders",orderRoutes)
+app.use("/api/admin",adminRoutes)
 
 app.use(notFound)
 
