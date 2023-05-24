@@ -5,7 +5,6 @@ import generateToken from "../utils/generateTokens.js";
 
 const getAllUsersForAdmin = asyncHandler(async(req,res) => {
     const users = await User.find({})
-    console.log("Users",users)
     res.send(users)
 })
 const deleteUserForAdmin = asyncHandler(async(req,res)=>{
@@ -51,4 +50,17 @@ const updateUserById = asyncHandler(async(req,res)=>{
         throw new Error("User Not Found")
     }
 })
-export {getAllUsersForAdmin,deleteUserForAdmin,getUserById,updateUserById}
+
+const deleteProduct = asyncHandler(async(req,res) => {
+    const product = await Product.findById(req.params.id)
+
+    if(product){
+        await product.remove()
+        res.json({message : "Product Removed"})
+    }else{
+        res.status(404)
+        throw new Error("Product Not Found")
+    }
+    res.json(product)
+})
+export {getAllUsersForAdmin,deleteUserForAdmin,getUserById,updateUserById,deleteProduct}
