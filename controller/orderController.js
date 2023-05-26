@@ -15,10 +15,10 @@ const addOrderItems = asyncHandler(async(req,res) => {
         shippingPrice,
         totalPrice
     } = req.body
+    console.log("order body:",req.body)
     if(orderItems && orderItems.length == 0){
         res.send(400)
         throw new Error("No Order Items")
-        return
     }else{
         const order = new Order({
         orderItems,
