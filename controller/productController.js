@@ -6,7 +6,7 @@ import Product from "../models/productModel.js";
 //GET /api/priducts
 //No Token required public routes
 const getProducts = asyncHandler(async(req,res) => {
-    const products= await Product.find({}).select("-countInStock -createdAt -description -reviews -updatedAt -user -brand -category");  
+    const products= await Product.find({}).select("-countInStock -createdAt -description -reviews -updatedAt -user");  
     return res.json(products)
 })
 

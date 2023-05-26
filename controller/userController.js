@@ -48,8 +48,8 @@ const getUserProfile = asyncHandler(async(req,res) => {
 
 const createUser = asyncHandler(async(req,res) => {
 
-    const {name, email,password} = req.body
-    console.log(name,email,password)
+    const {name, email,password,mobile} = req.body
+    console.log(name,email,password,mobile)
     
 
     const userExist = await User.findOne({email})
@@ -61,7 +61,8 @@ const createUser = asyncHandler(async(req,res) => {
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        //mobile
     })
     console.log("Create Use112r",user)
     if(user){
@@ -69,6 +70,7 @@ const createUser = asyncHandler(async(req,res) => {
             _id : ''+user._id,
             name : ''+user.name.toString(),
             email:  ''+user.email.toString(),
+          //  mobile : user.mobile,
             isAdmin : user.isAdmin,
             token : generateToken(user._id)
         })
