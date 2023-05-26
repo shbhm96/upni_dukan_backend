@@ -6,20 +6,18 @@ import Product from "../models/productModel.js";
 //GET /api/priducts
 //No Token required public routes
 const getProducts = asyncHandler(async(req,res) => {
-    const products= await Product.find({});    
-    res.json(products)
+    const products= await Product.find({}).select("-countInStock -createdAt -description -reviews -updatedAt -user -brand -category");  
+    return res.json(products)
 })
 
 const getProductById = asyncHandler(async(req,res) => {
     const product = await Product.findById(req.params.id)
-
     if(product){
-        res.json(product)
+        return res.json(product)
     }else{
         res.status(404)
         throw new Error("Product Not Found")
     }
-    res.json(product)
 })
 
 export {getProductById,getProducts}
