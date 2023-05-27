@@ -26,7 +26,8 @@
     "netlify-cli": "^15.2.0",
     "netlify-lambda": "^2.0.16",
     "serverless-http": "^3.2.0",
-    "webpack": "^5.84.1"
+    "webpack": "^5.84.1",
+    "node":"^18.16.0"
   },
   "devDependencies": {
     "concurrently": "^8.0.1",
